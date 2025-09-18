@@ -17,6 +17,8 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   int hungerLevel = 50;
   late TextEditingController _controller; // controller for text field
   Timer? _hungerTimer;
+  Timer? _winTimer;
+  int winReached = 0;
 
   @override
   void initState() {
@@ -33,6 +35,15 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         // Cap hunger at 100
         if (hungerLevel >= 100) {
           hungerLevel = 100;
+        }
+      });
+    });
+
+    // Start a timer to check for the win state
+    _winTimer = Timer.periodic(Duration(seconds: 180), (timer) {
+      setState(() {
+        if (happinessLevel >= 80) {
+          winReached = 1;
         }
       });
     });
@@ -130,6 +141,40 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                 ),
                 SizedBox(height: 16.0),
                 ElevatedButton(onPressed: _saveName, child: Text('Save Name')),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    // Win state
+    else if (winReached == 1) {
+      return Container(
+        child: Align(
+          alignment: AlignmentGeometry.center,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(64.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('You win!', style: TextStyle(fontSize: 20.0)),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+    // Loss state
+    else if (hungerLevel >= 100 || happinessLevel <= 10) {
+      return Container(
+        child: Align(
+          alignment: AlignmentGeometry.center,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(64.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('Game over!', style: TextStyle(fontSize: 20.0)),
               ],
             ),
           ),
