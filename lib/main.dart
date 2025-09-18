@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'dart:math';
+import 'package:collection/collection.dart';
 
 void main() {
   runApp(MaterialApp(home: DigitalPetApp()));
@@ -8,6 +10,28 @@ void main() {
 class DigitalPetApp extends StatefulWidget {
   @override
   _DigitalPetAppState createState() => _DigitalPetAppState();
+}
+
+// Define dropdown menu
+typedef IconEntry = DropdownMenuEntry<IconLabel>;
+
+enum IconLabel {
+  play('Play with Your Pet', Icons.sports_baseball),
+  feed('Feed Your Pet', Icons.fastfood);
+
+  const IconLabel(this.label, this.icon);
+  final String label;
+  final IconData icon;
+
+  static final List<IconEntry> entries = UnmodifiableListView<IconEntry>(
+    values.map<IconEntry>(
+      (IconLabel icon) => IconEntry(
+        value: icon,
+        label: icon.label,
+        leadingIcon: Icon(icon.icon),
+      ),
+    ),
+  );
 }
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
@@ -19,6 +43,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   Timer? _hungerTimer;
   Timer? _winTimer;
   int winReached = 0;
+
+  // Dropdown menu control variables
+  final TextEditingController iconController = TextEditingController();
+  IconLabel? selectedIcon;
 
   @override
   void initState() {
@@ -121,7 +149,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     }
   }
 
-  // Dynamically display query for pet name
+  // Dynamically display query for pet name, win/loss, or main interface
   Container getInterface() {
     if (petName == '') {
       return Container(
@@ -201,6 +229,36 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               style: TextStyle(fontSize: 20.0),
             ),
             SizedBox(height: 32.0),
+
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                DropdownMenu<IconLabel>(
+                  controller: iconController,
+                  enableFilter: false,
+                  requestFocusOnTap: true,
+                  leadingIcon: Icon(selectedIcon?.icon),
+                  label: const Text('Select Activity'),
+                  inputDecorationTheme: const InputDecorationTheme(
+                    filled: true,
+                    contentPadding: EdgeInsets.symmetric(vertical: 5.0),
+                  ),
+                  onSelected: (IconLabel? icon) {
+                    setState(() {
+                      if (icon?.label == 'Play with Your Pet') {
+                        _playWithPet();
+                      } else if (icon?.label == 'Feed Your Pet') {
+                        _feedPet();
+                      }
+                    });
+                  },
+                  dropdownMenuEntries: IconLabel.entries,
+                ),
+              ],
+            ),
+            SizedBox(height: 16.0),
+
             ElevatedButton(
               onPressed: _playWithPet,
               child: Text('Play with Your Pet'),
