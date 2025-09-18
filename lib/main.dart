@@ -46,6 +46,20 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     });
   }
 
+  Image getIcon(int value) {
+    double iconWidth = 300.0; // update icon width globally here
+
+    if (value > 70) {
+      return Image.asset('images/dog-icon-green.png', width: iconWidth);
+    } else if (value >= 50) {
+      return Image.asset('images/dog-icon-yellow.png', width: iconWidth);
+    } else if (value >= 1) {
+      return Image.asset('images/dog-icon-red.png', width: iconWidth);
+    } else {
+      return Image.asset('images/dog-icon-black.png', width: iconWidth);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,6 +68,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            getIcon(-5),
             Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
             SizedBox(height: 16.0),
             Text(
