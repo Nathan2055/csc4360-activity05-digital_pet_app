@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MaterialApp(
-    home: DigitalPetApp(),
-  ));
+  runApp(MaterialApp(home: DigitalPetApp()));
 }
 
 class DigitalPetApp extends StatefulWidget {
@@ -51,17 +49,12 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Digital Pet'),
-      ),
+      appBar: AppBar(title: Text('Digital Pet')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'Name: $petName',
-              style: TextStyle(fontSize: 20.0),
-            ),
+            Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
             SizedBox(height: 16.0),
             Text(
               'Happiness Level: $happinessLevel',
@@ -78,14 +71,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               child: Text('Play with Your Pet'),
             ),
             SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: _feedPet,
-              child: Text('Feed Your Pet'),
-            ),
+            ElevatedButton(onPressed: _feedPet, child: Text('Feed Your Pet')),
           ],
         ),
       ),
     );
   }
 }
-
