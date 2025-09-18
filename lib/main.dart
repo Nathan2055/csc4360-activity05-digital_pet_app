@@ -234,7 +234,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
               'Hunger Level: $hungerLevel',
               style: TextStyle(fontSize: 20.0),
             ),
-            SizedBox(height: 32.0),
+            SizedBox(height: 20.0),
 
             // Activities dropdown menu
             Row(
