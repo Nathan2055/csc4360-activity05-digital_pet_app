@@ -10,8 +10,8 @@ class DigitalPetApp extends StatefulWidget {
 }
 
 class _DigitalPetAppState extends State<DigitalPetApp> {
-  //String petName = "Your Pet";
   String petName = '';
+  String petNameTemp = '';
   int happinessLevel = 50;
   int hungerLevel = 50;
 
@@ -63,6 +63,12 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     });
   }
 
+  void _saveName() {
+    setState(() {
+      petName = _controller.text;
+    });
+  }
+
   // Display colored icon based on inputted happiness value
   Image getMoodIcon(int value) {
     double iconWidth = 200.0; // update icon width globally here
@@ -101,37 +107,10 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             controller: _controller,
             decoration: InputDecoration(
               border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
-            ),
-            onSubmitted: (String value) async {
-              await showDialog<void>(
-                context: context,
-                builder: (BuildContext context) {
-                  return AlertDialog(
-                    title: const Text('Thanks!'),
-                    content: Text(
-                      'You typed "$value", which has length ${value.characters.length}.',
-                    ),
-                    actions: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('OK'),
-                      ),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
-
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter a search term',
+              hintText: 'Enter pet name',
             ),
           ),
+          ElevatedButton(onPressed: _saveName, child: Text('Save Name')),
 
           getMoodIcon(happinessLevel),
           SizedBox(height: 16.0),
