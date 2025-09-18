@@ -29,7 +29,11 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     _hungerTimer = Timer.periodic(Duration(seconds: 30), (timer) {
       setState(() {
         hungerLevel += 5; // Increase hunger
-        // You can add logic here to cap the hunger at 100
+
+        // Cap hunger at 100
+        if (hungerLevel >= 100) {
+          hungerLevel = 100;
+        }
       });
     });
   }
