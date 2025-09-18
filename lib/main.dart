@@ -88,7 +88,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
 
     if (value > 70) {
       return Image.asset('images/dog-icon-green.png', width: iconWidth);
-    } else if (value >= 50) {
+    } else if (value >= 30) {
       return Image.asset('images/dog-icon-yellow.png', width: iconWidth);
     } else if (value >= 1) {
       return Image.asset('images/dog-icon-red.png', width: iconWidth);
@@ -101,7 +101,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   Text getMoodText(int value) {
     if (value > 70) {
       return Text('Happy', style: TextStyle(fontSize: 15.0));
-    } else if (value >= 50) {
+    } else if (value >= 30) {
       return Text('Neutral', style: TextStyle(fontSize: 15.0));
     } else if (value >= 1) {
       return Text('Unhappy', style: TextStyle(fontSize: 15.0));
