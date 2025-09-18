@@ -151,6 +151,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
 
   // Dynamically display query for pet name, win/loss, or main interface
   Container getInterface() {
+    // Pet name input interface
     if (petName == '') {
       return Container(
         child: Align(
@@ -208,15 +209,20 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
           ),
         ),
       );
-    } else {
+    }
+    // Main interface
+    else {
       return Container(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            // Pet icon and mood text
             getMoodIcon(happinessLevel),
             SizedBox(height: 16.0),
             getMoodText(happinessLevel),
             SizedBox(height: 16.0),
+
+            // Pet stats
             Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
             SizedBox(height: 16.0),
             Text(
@@ -230,6 +236,7 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
             ),
             SizedBox(height: 32.0),
 
+            // Activities dropdown menu
             Row(
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -257,14 +264,6 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
                 ),
               ],
             ),
-            SizedBox(height: 16.0),
-
-            ElevatedButton(
-              onPressed: _playWithPet,
-              child: Text('Play with Your Pet'),
-            ),
-            SizedBox(height: 16.0),
-            ElevatedButton(onPressed: _feedPet, child: Text('Feed Your Pet')),
           ],
         ),
       );
