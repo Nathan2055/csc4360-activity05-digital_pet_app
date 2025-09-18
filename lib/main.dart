@@ -98,65 +98,65 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
   }
 
   // Dynamically display query for pet name
-  Column getInterface() {
+  Container getInterface() {
     if (petName == '') {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          TextField(
-            controller: _controller,
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: 'Enter pet name',
+      return Container(
+        child: Align(
+          alignment: AlignmentGeometry.topCenter,
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Expanded(
+                  child: TextField(
+                    controller: _controller,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter pet name',
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: _saveName,
+                    child: Text('Save Name'),
+                  ),
+                ),
+              ],
             ),
           ),
-          ElevatedButton(onPressed: _saveName, child: Text('Save Name')),
-
-          getMoodIcon(happinessLevel),
-          SizedBox(height: 16.0),
-          getMoodText(happinessLevel),
-          SizedBox(height: 16.0),
-          Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
-          SizedBox(height: 16.0),
-          Text(
-            'Happiness Level: $happinessLevel',
-            style: TextStyle(fontSize: 20.0),
-          ),
-          SizedBox(height: 16.0),
-          Text('Hunger Level: $hungerLevel', style: TextStyle(fontSize: 20.0)),
-          SizedBox(height: 32.0),
-          ElevatedButton(
-            onPressed: _playWithPet,
-            child: Text('Play with Your Pet'),
-          ),
-          SizedBox(height: 16.0),
-          ElevatedButton(onPressed: _feedPet, child: Text('Feed Your Pet')),
-        ],
+        ),
       );
     } else {
-      return Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          getMoodIcon(happinessLevel),
-          SizedBox(height: 16.0),
-          getMoodText(happinessLevel),
-          SizedBox(height: 16.0),
-          Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
-          SizedBox(height: 16.0),
-          Text(
-            'Happiness Level: $happinessLevel',
-            style: TextStyle(fontSize: 20.0),
-          ),
-          SizedBox(height: 16.0),
-          Text('Hunger Level: $hungerLevel', style: TextStyle(fontSize: 20.0)),
-          SizedBox(height: 32.0),
-          ElevatedButton(
-            onPressed: _playWithPet,
-            child: Text('Play with Your Pet'),
-          ),
-          SizedBox(height: 16.0),
-          ElevatedButton(onPressed: _feedPet, child: Text('Feed Your Pet')),
-        ],
+      return Container(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            getMoodIcon(happinessLevel),
+            SizedBox(height: 16.0),
+            getMoodText(happinessLevel),
+            SizedBox(height: 16.0),
+            Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
+            SizedBox(height: 16.0),
+            Text(
+              'Happiness Level: $happinessLevel',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            SizedBox(height: 16.0),
+            Text(
+              'Hunger Level: $hungerLevel',
+              style: TextStyle(fontSize: 20.0),
+            ),
+            SizedBox(height: 32.0),
+            ElevatedButton(
+              onPressed: _playWithPet,
+              child: Text('Play with Your Pet'),
+            ),
+            SizedBox(height: 16.0),
+            ElevatedButton(onPressed: _feedPet, child: Text('Feed Your Pet')),
+          ],
+        ),
       );
     }
   }
