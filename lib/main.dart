@@ -46,8 +46,9 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     });
   }
 
+  // Display colored icon based on inputted happiness value
   Image getIcon(int value) {
-    double iconWidth = 300.0; // update icon width globally here
+    double iconWidth = 200.0; // update icon width globally here
 
     if (value > 70) {
       return Image.asset('images/dog-icon-green.png', width: iconWidth);
@@ -68,7 +69,8 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            getIcon(-5),
+            getIcon(happinessLevel),
+            SizedBox(height: 16.0),
             Text('Name: $petName', style: TextStyle(fontSize: 20.0)),
             SizedBox(height: 16.0),
             Text(
