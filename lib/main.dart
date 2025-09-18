@@ -102,27 +102,21 @@ class _DigitalPetAppState extends State<DigitalPetApp> {
     if (petName == '') {
       return Container(
         child: Align(
-          alignment: AlignmentGeometry.topCenter,
+          alignment: AlignmentGeometry.center,
           child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Row(
+            padding: const EdgeInsets.all(64.0),
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Expanded(
-                  child: TextField(
-                    controller: _controller,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter pet name',
-                    ),
+                TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    hintText: 'Enter pet name',
                   ),
                 ),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: _saveName,
-                    child: Text('Save Name'),
-                  ),
-                ),
+                SizedBox(height: 16.0),
+                ElevatedButton(onPressed: _saveName, child: Text('Save Name')),
               ],
             ),
           ),
